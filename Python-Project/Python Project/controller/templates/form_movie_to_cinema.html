@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Form Add Movie to Cinema</h1>
+ <form action="/add_movie_to_cinema" method=post>
+     <dl>
+         <dt>Cinema Name :</dt>
+         <dd><select name="cinemaList">
+                 {% for item in data[0]%}
+                <option value="{{item[0]}}">{{item[1]}}</option>
+                {%endfor%}
+            </select>
+         </dd>
+         <dt>Movie Name :</dt>
+         <dd><select name="movieList">
+                {% for item in data[1]%}
+                 <option value="{{item[0]}}">{{item[1]}}</option>
+                {%endfor%}
+            </select>
+         </dd>
+         <dt>Movie Ticket Price :</dt>
+         <dt><input type="number" name="ticket_price" required></dt>
+         <dt>Movie Time :</dt>
+         <dt><input type="text" name="movie_time" required></dt>
+     </dl>
+<p><input type=submit value=Submit>
+  </form>
+
+<br/>
+<table border="1">
+    <thead><td>Cinema Name</td><td>Movie Name</td><td>Price</td><td>Time</td></thead>
+{% for item in data[2] %}
+<tr>
+    <td>{{item[1]}}</td><td>{{item[9]}}</td><td>{{item[4]}}</td><td>{{item[5]}}<td/><td><a href="/delete_movie_to_cinema/{{item[3]}}">Delete</a></td>
+</tr>
+{% endfor %}
+</table>
+
+
+{% endblock %}

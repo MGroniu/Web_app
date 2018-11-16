@@ -1,0 +1,117 @@
+{%extends 'layout.html'%}
+{% block body%}
+
+<table border="1">
+    <div id="cinema_id" hidden="hidden">{{data[0][0]}}</div>
+    <div id="movie_id" hidden="hidden">{{data[0][6]}}</div>
+    <div><h2>{{data[0][1]}}</h2></div>
+    <div>Movie Img {{data[0][10]}}</div>
+    <thead><td>Movies Name</td><td>{{data[0][9]}}</td></thead>
+
+
+    <tr><td>Price</td><td>{{data[0][4]}}</td></tr>
+    <tr><td>Time</td><td>{{data[0][5]}}</td></tr>
+    <tr><td>Description</td><td>{{data[0][10]}}</td></tr>
+    <tr><td>Address :</td><td>{{data[0][2]}}</td></tr>
+    <tr><td>Book Seats Below</a></td></tr>
+
+</table>
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        /* Defines your container width */
+        #SeatingSection { width: 150px; }
+
+        /* A generic class for each of your "seats" that specifies a size and will make them "float" */
+        .seat { float : left; height: 20px; width: 20px; background : #ddd; margin: 2px; color: #fff }
+
+        /* Coloring based on availability */
+        .seat.available { background: green; cursor: pointer; }
+        .seat.not-available { background: red; }
+        .seat.selected { background: orange; }
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<meta charset=utf-8 />
+
+  <script type='text/javascript'>
+    $(function(){
+
+      //When an available seat is clicked on
+      $('.seat.available').click(function(){
+          //Toggle selection for this seat
+          $(this).toggleClass('selected');
+
+          //var ID=$(this).attr('id');
+
+          //seats.push(ID)
+      });
+
+      $("#Purchase").click(function(){
+          //Grab the selected seats
+          var cinema_id = $("#cinema_id").text();
+          var movie_id = $("#movie_id").text();
+
+          var selected = $(".seat.selected");
+          var seats = [];
+          selected.each(function(){
+          var id   =  $(this).attr("id");
+            seats.push(id)
+        });
+
+          //alert(seats);
+        if(selected.length == 0){
+           alert("No seats were selected.");
+        }
+        else{
+
+           var r = confirm(selected.length + ' seats '+ seats + ' were selected. Proceed to Purchase screen.');
+            if (r == true) {
+                window.location.href="http://127.0.0.1:5000/book_ticket/"+cinema_id+"/"+movie_id+"/"+seats;
+            } else {
+                 alert("You pressed Cancel!");
+            }
+
+        }
+      });
+
+    });
+  </script>
+</head>
+<body>
+<div><h3>Book Seats Here</h3></div>
+  <div id="YourSeats">
+      <div class='seat {{data[1][0][3]}}' title='Seat A1' id="A1">
+              A1
+      </div>
+      <div class='seat {{data[1][0][4]}}' title='Seat A2' id="A2">
+              A2
+      </div>
+      <div class='seat {{data[1][0][5]}}' title='Seat A3' id="A3">
+              A3
+      </div>
+      <div class='seat {{data[1][0][6]}}' title='Seat A4' id="A4">
+              A4
+      </div>
+
+      <div style='clear: both;'></div>
+      <div class='seat {{data[1][0][7]}}' title='Seat B1' id="B1">
+              B1
+      </div>
+      <div class='seat {{data[1][0][8]}}' title='Seat B2' id="B2">
+              B2
+      </div>
+      <div class='seat {{data[1][0][9]}}' title='Seat B3' id="B3">
+              B3
+      </div>
+      <div class='seat {{data[1][0][10]}}' title='Seat B4' id="B4">
+              B4
+      </div>
+
+</div>
+  <div style='clear: both;'></div>
+  <hr />
+  <button id='Purchase'>Purchase Seats</button>
+</body>
+</html>
+{% endblock %}

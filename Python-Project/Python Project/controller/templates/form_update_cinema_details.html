@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Form Update Cinema Details</h1>
+ <form action="/update_cinema/{{data[0][0]}}" method=post>
+     <dl>
+         <dt>Cinema Name :
+         <dd><input type=text name="cinema_name" value = "{{data[0][1]}}"required/>
+         <dt>Address :
+         <dd><input type=text name="cinema_address" value="{{data[0][2]}}" required/>
+     </dl>
+<p><input type=submit value=Submit>
+  </form>
+
+{% endblock %}

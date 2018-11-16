@@ -1,0 +1,14 @@
+{%extends 'layout.html'%}
+{% block body%}
+
+<table border="1">
+    <div><h2>{{data[0][1]}}</h2></div>
+
+    <thead><td>Movies Name</td><td>Time</td><td>Price</td><td>Action</td></thead>
+{% for item in data %}
+<tr>
+    <td>{{item[9]}}</td><td>{{item[5]}}</td><td>{{item[4]}}</td><td><a href="/movie/{{item[6]}}/{{item[0]}}">select</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

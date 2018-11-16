@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Form Add Movie Details</h1>
+ <form action="/add_movie_details" method=post>
+     <dl>
+         <dt>Movie Name :
+         <dd><input type=text name="movie_name" required/>
+         <dt>Movie Description :
+         <dd><input type=text name="movie_desc" required/>
+     </dl>
+<p><input type=submit value=Submit>
+  </form>
+
+<br/>
+<table border="1">
+    <thead><td>Movie Name</td><td>Movie Description</td><td>Action</td></thead>
+{% for item in data %}
+<tr>
+    <td>{{item[1]}}</td><td>{{item[2]}}</td><td><a href="/delete_movie_details/{{item[0]}}">Delete</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
